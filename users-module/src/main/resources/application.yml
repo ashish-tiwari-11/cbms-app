@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: "UsersModule"
+  datasource:
+    username: root
+    password: aceEM@11
+    url: 'jdbc:mysql://localhost:3306/cbms'
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 20
+      pool-name: userModuleConnectionPool
+      connection-timeout: 3000
+      max-lifetime: 300000 #  Sets the maximum lifetime of a connection in the pool. An in-use connection will never retire. HikariCP removes it only when it is closed. The minimum value is 30000 ms (30 seconds). The default value is 1800000 ms (30 minutes)
+      idle-timeout: 10000 # Sets the maximum amount of time that a connection can to sit idle in the pool. This setting only applies when minimumIdle is less than maximum-pool-size. The minimum value is 10000ms (10 seconds). The default value is 600000 (10 minutes).
+      keepalive-time: 30000 # Sets how frequently HikariCP will attempt to keep a connection alive. The minimum value you can set is 30000 ms (30 seconds). However, a value in the range of minutes is most desirable. The default is 0 which disables this setting.
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+  jpa:
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+server:
+  port: 9090
+
+rsa:
+  private-key: 'certs/private.pem'
+  public-key: 'certs/public.pem'
